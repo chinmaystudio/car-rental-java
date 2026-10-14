@@ -234,7 +234,42 @@ public class CarRentalService {
     // ==========================================
 
     /**
-     * Registers a new customer into the system.
+     * Overloaded method: Registers a customer with a specified Customer ID.
+     * Demonstrates Compile-Time Polymorphism (Method Overloading).
+     *
+     * @param customerId Custom client identifier (e.g. "C101")
+     * @param name       Customer full name
+     * @param contact    Contact mobile/phone number
+     * @return Registered Customer instance
+     * @throws InvalidRentalException if ID already exists, or if fields are invalid
+     */
+    public Customer registerCustomer(String customerId, String name, String contact) throws InvalidRentalException {
+        if (customerId == null || customerId.trim().isEmpty()) {
+            return registerCustomer(name, contact); // Fallback to auto-generation
+        }
+        customerId = customerId.trim();
+
+        // Check for duplicate customer ID
+        if (findCustomerById(customerId) != null) {
+            throw new InvalidRentalException("Customer ID [" + customerId + "] already exists in the system. Please use a unique ID.");
+        }
+        if (name == null || name.trim().isEmpty()) {
+            throw new InvalidRentalException("Customer name cannot be empty.");
+        }
+        if (contact == null || contact.trim().isEmpty()) {
+            throw new InvalidRentalException("Contact number cannot be empty.");
+        }
+
+        Customer customer = new Customer(customerId, name.trim(), contact.trim());
+        ensureCustomerCapacity();
+        customers[customerCount++] = customer;
+        updateNextCustomerSeq(customerId);
+        return customer;
+    }
+
+    /**
+     * Overloaded method: Registers a new customer with an auto-generated unique ID.
+     * Demonstrates Compile-Time Polymorphism (Method Overloading).
      *
      * @param name    Customer full name
      * @param contact Contact mobile/phone number
@@ -250,8 +285,11 @@ public class CarRentalService {
         }
 
         String customerId = "C" + nextCustomerSeq++;
-        Customer customer = new Customer(customerId, name.trim(), contact.trim());
+        while (findCustomerById(customerId) != null) {
+            customerId = "C" + nextCustomerSeq++;
+        }
 
+        Customer customer = new Customer(customerId, name.trim(), contact.trim());
         ensureCustomerCapacity();
         customers[customerCount++] = customer;
         return customer;

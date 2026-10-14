@@ -135,7 +135,7 @@ All files reside in the `data/` directory and use standard CSV formatting:
 | **Interface** | `Rentable.java` | Methods `rent()` and `returnVehicle()` implemented in `Vehicle` |
 | **Inheritance** | `Car.java`, `SUV.java` | `extends Vehicle`, calls `super(...)` |
 | **Method Overriding** | `Car.java`, `SUV.java` | Different implementations of `calculateDailyRate()` |
-| **Method Overloading** | `CarRentalService.java`| `calculateBill(vehicle, days)` vs `calculateBill(vehicle, days, discount)` |
+| **Method Overloading** | `CarRentalService.java`| `calculateBill(...)` and `registerCustomer(customerId, name, contact)` vs `registerCustomer(name, contact)` |
 | **Arrays of Objects** | `CarRentalService.java`| `Vehicle[]`, `Customer[]`, `Rental[]` with dynamic doubling |
 | **Custom Exceptions** | `carrental.exception` | `CarNotAvailableException`, `InvalidRentalException` (checked) |
 | **File I/O** | `CarRentalService.java`| `BufferedReader`, `BufferedWriter`, `FileReader`, `FileWriter` |

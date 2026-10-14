@@ -1,6 +1,6 @@
 CAR,V101,Honda,City,2200.0,true,Sedan
 CAR,V102,Hyundai,i20,1600.0,false,Hatchback
-CAR,V103,Skoda,Slavia,2500.0,true,Sedan
+CAR,V103,Skoda,Slavia,2500.0,false,Sedan
 SUV,V104,Toyota,Fortuner,4500.0,true,true
 SUV,V105,Mahindra,Scorpio-N,3200.0,true,false
 SUV,V106,Tata,Safari,3500.0,true,false
